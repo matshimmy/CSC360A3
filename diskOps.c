@@ -9,6 +9,28 @@
 #include "diskOps.h"
 #include "aboutDiskStruct.h"
 
+int *countClust(aboutDisk* ad1, int firstClust, int *totalClusts){
+	int x = 1;
+	int FATVal = getFATVal(firstClust, ad1);
+	while (FATVal < 0xFF0 && FATVal != 0){
+		FATVal = getFATVal(FATVal, ad1);
+		x++;
+	}
+	int *clusts = (int *)malloc(sizeof(int)*x);
+	*totalClusts = x;
+	clusts[0] = firstClust;
+	x = 1;
+	FATVal = getFATVal(firstClust, ad1);
+	while (FATVal < 0xFF0 && FATVal != 0){
+
+		clusts[x] = FATVal;
+		x++;
+		FATVal = getFATVal(FATVal, ad1);
+
+	}
+	
+	return clusts;
+}
 
 int getFATVal(int index, aboutDisk *ad1){
 	movToFAT(ad1);

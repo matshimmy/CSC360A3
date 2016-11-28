@@ -68,7 +68,7 @@ void printFiles(aboutDisk *ad1){
 	char *date;
 	char *time;
 	char *fileName;
-	while(count != 16){
+	while(count != 16*14){
 		if ((look != 0xF) && (strcmp(extn,"   ") != 0) && (extn[0] != '\0')){ /*if it is not a long filename and it has a extension (that is not 000000) then it is a file*/
 			fileName = getStr(ad1->curMp, 0, 8);
 			fileSz = lEndian(ad1->curMp, 28, 4);

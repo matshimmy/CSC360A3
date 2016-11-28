@@ -1,5 +1,6 @@
 #include "aboutDiskStruct.h"
 
+int *countClust(aboutDisk*, int, int*); /*counts number of clusters*/
 void movToBoot(aboutDisk*); /*moves to boot sector*/
 void movToFAT(aboutDisk*);/*moves to FAT sector*/
 void movToDir(aboutDisk*);/*moves to root directory*/
