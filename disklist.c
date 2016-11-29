@@ -72,14 +72,14 @@ void printFiles(aboutDisk *ad1){
 		if ((look != 0xF) && (strcmp(extn,"   ") != 0) && (extn[0] != '\0')){ /*if it is not a long filename and it has a extension (that is not 000000) then it is a file*/
 			fileName = getStr(ad1->curMp, 0, 8);
 			fileSz = lEndian(ad1->curMp, 28, 4);
-			fileTime = lEndian(ad1->curMp, 22, 2);
-			fileDate = lEndian(ad1->curMp, 24, 2);
+			fileTime = lEndian(ad1->curMp, 14, 2);
+			fileDate = lEndian(ad1->curMp, 16, 2);
 			date  = decodeDate(fileDate);
 			time = decodeTime(fileTime);
 			if(look == 0x10){ /*directory*/
 				printf("D %10d bytes %20s \t%s \t%s\n", fileSz, fileName, time, date);
 			}else{
-				printf("F %10d bytes %20s \t%s \t%s\n", fileSz, fileName, time, date);
+				printf("F %10d bytes %20s \t%8s \t%10s\n", fileSz, fileName, time, date);
 			}
 		}
 		ad1->curMp += 32; /*moves over to the next entry*/
